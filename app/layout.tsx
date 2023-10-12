@@ -1,23 +1,23 @@
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
-import { sfPro, inter } from "./fonts";
+import { sfPro, inter, youngSerif, nunitoSans } from "./fonts";
 import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
 import { Suspense } from "react";
 
 export const metadata = {
-  title: "Precedent - Building blocks for your Next.js project",
+  title: "Geotory",
   description:
-    "Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.",
+    "Geotory is an open, social repository of shapes, layers, maps, and other geo data.",
   twitter: {
     card: "summary_large_image",
-    title: "Precedent - Building blocks for your Next.js project",
+    title: "Geotory",
     description:
-      "Precedent is the all-in-one solution for your Next.js project. It includes a design system, authentication, analytics, and more.",
-    creator: "@steventey",
+      "Geotory is an open, social repository of shapes, layers, maps, and other geo data.",
+    creator: "@mager",
   },
-  metadataBase: new URL("https://precedent.dev"),
+  metadataBase: new URL("https://geotory.com"),
   themeColor: "#FFF",
 };
 
@@ -28,7 +28,9 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cx(sfPro.variable, inter.variable)}>
+      <body
+        className={cx(sfPro.variable, youngSerif.variable, nunitoSans.variable)}
+      >
         <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100" />
         <Suspense fallback="...">
           <Nav />
