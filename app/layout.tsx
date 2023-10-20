@@ -2,9 +2,11 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
 import { sfPro, inter, youngSerif, nunitoSans } from "./fonts";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
 import { Suspense } from "react";
+import { getServerSession } from "next-auth/next";
 
 export const metadata = {
   title: "Geotory",
@@ -26,6 +28,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession(authOptions);
+
   return (
     <html lang="en">
       <body
@@ -33,7 +37,7 @@ export default async function RootLayout({
       >
         <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100" />
         <Suspense fallback="...">
-          <Nav />
+          <Nav session={session} />
         </Suspense>
         <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
           {children}
