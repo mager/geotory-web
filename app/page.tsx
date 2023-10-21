@@ -1,3 +1,4 @@
+import prisma from "@/lib/prisma";
 import { MapPin } from "lucide-react";
 
 async function getUser(userID: string) {
