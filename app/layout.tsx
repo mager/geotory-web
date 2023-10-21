@@ -35,15 +35,15 @@ export default async function RootLayout({
       <body
         className={cx(sfPro.variable, youngSerif.variable, nunitoSans.variable)}
       >
-        <div>
+        <div className="flex h-screen flex-col justify-between">
           <Suspense fallback="...">
             <Nav session={session} />
           </Suspense>
-          <main className="flex w-full flex-col items-center justify-center py-32">
+          <main className="mb-auto flex w-full flex-col items-center justify-center py-32">
             {children}
           </main>
+          <Footer />
         </div>
-        <Footer />
         <Analytics />
       </body>
     </html>
