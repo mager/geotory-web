@@ -8,6 +8,9 @@ module.exports = {
   },
   theme: {
     extend: {
+      debug: {
+        a: "border-2"
+      },
       fontFamily: {
         display: ["var(--font-nunito-sans)", "system-ui", "sans-serif"],
         default: ["var(--font-nunito-sans)", "system-ui", "sans-serif"],

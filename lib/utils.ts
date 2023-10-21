@@ -1,7 +1,8 @@
 import ms from "ms";
-import postgres from "postgres";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getServerSession } from "next-auth/next";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -68,3 +69,17 @@ export const truncate = (str: string, length: number) => {
   if (!str || str.length <= length) return str;
   return `${str.slice(0, length)}...`;
 };
+
+export async function getUser() {
+  const session = await getServerSession(authOptions);
+
+  if (!session || !session.user || !session.user.image) {
+    return null;
+  }
+
+  // Fetch the user from prisma
+  const user = await prisma?.user.findUnique({
+    where: { email: session.user.email as string },
+  });
+  return user;
+}
