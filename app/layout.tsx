@@ -5,7 +5,7 @@ import { sfPro, inter, youngSerif, nunitoSans } from "./fonts";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
-import { Suspense } from "react";
+import { Suspense, cloneElement } from "react";
 import { getServerSession } from "next-auth/next";
 
 export const metadata = {
@@ -35,13 +35,14 @@ export default async function RootLayout({
       <body
         className={cx(sfPro.variable, youngSerif.variable, nunitoSans.variable)}
       >
-        <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100" />
-        <Suspense fallback="...">
-          <Nav session={session} />
-        </Suspense>
-        <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
-          {children}
-        </main>
+        <div>
+          <Suspense fallback="...">
+            <Nav session={session} />
+          </Suspense>
+          <main className="flex w-full flex-col items-center justify-center py-32">
+            {children}
+          </main>
+        </div>
         <Footer />
         <Analytics />
       </body>
