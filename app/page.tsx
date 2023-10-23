@@ -22,9 +22,6 @@ export default async function Home() {
         <div className="mb-4 flex justify-center">
           <MapPin size={64} strokeWidth={1.5} />
         </div>
-        <p className="font-sansSerif">
-          Visit your profile, add some friends, or explore some data.
-        </p>
       </div>
     </>
   );
