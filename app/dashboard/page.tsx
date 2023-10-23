@@ -1,5 +1,7 @@
+// import useSWR from "swr";
 import { getUser } from "@/lib/utils";
 import UpdateUsername from "@/components/forms/update-username";
+import DashboardWelcome from "@/components/dashboard/dashboard-welcome";
 
 export default async function Page() {
   const user = await getUser();
@@ -7,17 +9,12 @@ export default async function Page() {
   return (
     <div className="flex w-full flex-col justify-between px-5">
       <div>
-        <h1>Welcome, {user?.name}!</h1>
+        <h1 className="text-2xl">Welcome, {user?.name}!</h1>
       </div>
       {user && !user.slug ? (
-        <div>
-          <p>Add a username to continue:</p>
-          <UpdateUsername user={user} />
-        </div>
+        <UpdateUsername user={user} />
       ) : (
-        <div>
-          <p>Create a dataset</p>
-        </div>
+        <DashboardWelcome />
       )}
     </div>
   );

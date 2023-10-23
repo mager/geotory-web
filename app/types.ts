@@ -7,6 +7,10 @@ export type User = {
   image: string;
 };
 
-export type UpdateUsername = {
+export type UpdateUsernameReq = {
   username: string;
+};
+
+export type UpdateUsernameResp = {
+  user: User;
 };

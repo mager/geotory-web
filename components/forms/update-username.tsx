@@ -1,35 +1,57 @@
 "use client";
 // @ts-ignore
 import { useState } from "react";
-import type { UpdateUsername } from "@/app/types";
+import { useRouter } from "next/navigation";
+import { post } from "@/lib/utils";
+import Button from "@/components/shared/button";
+import Error from "@/components/shared/error";
+import Loading from "@/components/shared/loading";
+import type { UpdateUsernameResp } from "@/app/types";
 import type { User } from "@prisma/client";
 
 export default function UpdateUsername({ user }: { user: User }) {
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [slug, setSlug] = useState(user?.slug);
+  const router = useRouter();
 
   const submit = async () => {
-    const body = Object.assign(user, { slug });
+    setLoading(true);
+    const data: User = Object.assign(user, { slug });
+    const res = await post("/api/user", data);
 
-    const res = await fetch("/api/user", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
+    const result: UpdateUsernameResp = await res.json();
 
-    const result: UpdateUsername = await res.json();
-    console.log({ result });
+    if (result?.user.slug === slug) {
+      router.refresh();
+    } else {
+      console.error("Failed to update username!", { result });
+      setError("Failed to update username!");
+      setLoading(false);
+    }
   };
 
-  return (
-    <form action={submit}>
-      <input
-        id="username"
-        name="username"
-        placeholder="Enter a username"
-        onChange={(e) => setSlug(e.target.value)}
-      />
+  if (loading) {
+    return <Loading />;
+  }
 
-      <button type="submit">Add</button>
-    </form>
+  return (
+    <div>
+      <p className="my-2">Add a username to continue...</p>
+      {error && <Error message={error} />}
+      <form action={submit} className="flex flex-col space-y-4">
+        <input
+          id="username"
+          name="username"
+          placeholder="Enter a username"
+          onChange={(e) => setSlug(e.target.value)}
+          className="rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200"
+        />
+
+        <Button isSubmit disabled={loading}>
+          Add
+        </Button>
+      </form>
+    </div>
   );
 }
