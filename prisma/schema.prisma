@@ -64,4 +64,5 @@ model Dataset {
   name   String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   slug   String
+  source String
 }
