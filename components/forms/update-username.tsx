@@ -8,6 +8,7 @@ import Error from "@/components/shared/error";
 import Loading from "@/components/shared/loading";
 import type { UpdateUsernameResp } from "@/app/types";
 import type { User } from "@prisma/client";
+import Input from "../shared/input";
 
 export default function UpdateUsername({ user }: { user: User }) {
   const [error, setError] = useState("");
@@ -40,12 +41,10 @@ export default function UpdateUsername({ user }: { user: User }) {
       <p className="my-2">Add a username to continue...</p>
       {error && <Error message={error} />}
       <form action={submit} className="flex flex-col space-y-4">
-        <input
+        <Input
           id="username"
-          name="username"
           placeholder="Enter a username"
           onChange={(e) => setSlug(e.target.value)}
-          className="rounded-md border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-200"
         />
 
         <Button isSubmit disabled={loading}>
