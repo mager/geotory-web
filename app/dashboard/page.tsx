@@ -14,7 +14,7 @@ export default async function Page() {
       {user && !user.slug ? (
         <UpdateUsername user={user} />
       ) : (
-        <DashboardWelcome />
+        <DashboardWelcome user={user} />
       )}
     </div>
   );

@@ -1,10 +1,6 @@
 import { AlertCircle } from "lucide-react";
 
-type Props = {
-  message: string;
-};
-
-export default function Error({ message }: Props) {
+export default function Error({ message }: { message: string }) {
   return (
     <div className="error-box my-4 flex text-red-400">
       <div className="error-icon mr-2">

@@ -5,41 +5,21 @@ import { cn } from "@/lib/utils";
 import { Drawer } from "vaul";
 import * as Dialog from "@radix-ui/react-dialog";
 import useMediaQuery from "@/lib/hooks/use-media-query";
+import { XCircle } from "lucide-react";
 
 export default function Modal({
   children,
   className,
+  closeButton = true,
   showModal,
   setShowModal,
 }: {
   children: React.ReactNode;
   className?: string;
+  closeButton?: boolean;
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
 }) {
-  const { isMobile } = useMediaQuery();
-
-  if (isMobile) {
-    return (
-      <Drawer.Root open={showModal} onOpenChange={setShowModal}>
-        <Drawer.Overlay className="fixed inset-0 z-40 bg-gray-100 bg-opacity-10 backdrop-blur" />
-        <Drawer.Portal>
-          <Drawer.Content
-            className={cn(
-              "fixed bottom-0 left-0 right-0 z-50 mt-24 rounded-t-[10px] border-t border-gray-200 bg-white",
-              className,
-            )}
-          >
-            <div className="sticky top-0 z-20 flex w-full items-center justify-center rounded-t-[10px] bg-inherit">
-              <div className="my-3 h-1 w-12 rounded-full bg-gray-300" />
-            </div>
-            {children}
-          </Drawer.Content>
-          <Drawer.Overlay />
-        </Drawer.Portal>
-      </Drawer.Root>
-    );
-  }
   return (
     <Dialog.Root open={showModal} onOpenChange={setShowModal}>
       <Dialog.Portal>
@@ -56,6 +36,15 @@ export default function Modal({
             className,
           )}
         >
+          {closeButton && (
+            <Dialog.Close asChild>
+              <div className="mr-2 mt-2 flex justify-end">
+                <button aria-label="Close">
+                  <XCircle />
+                </button>
+              </div>
+            </Dialog.Close>
+          )}
           {children}
         </Dialog.Content>
       </Dialog.Portal>

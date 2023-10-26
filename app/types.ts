@@ -14,3 +14,7 @@ export type UpdateUsernameReq = {
 export type UpdateUsernameResp = {
   user: User;
 };
+
+export type CreateDatasetResp = {
+  user: User;
+};
