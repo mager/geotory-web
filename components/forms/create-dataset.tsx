@@ -56,7 +56,7 @@ export default function CreateDataset() {
   return (
     <div className="px-4">
       {error && <Error message={error} />}
-      <form action={submit} className="mb-2 flex flex-col space-y-4">
+      <form action={submit} className="mb-2 flex flex-col">
         <Input
           label="Name"
           id="name"
