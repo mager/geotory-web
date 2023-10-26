@@ -1,3 +1,5 @@
+import { Dataset } from "@prisma/client";
+
 export type User = {
   id: string;
   name: string;
@@ -16,5 +18,5 @@ export type UpdateUsernameResp = {
 };
 
 export type CreateDatasetResp = {
-  user: User;
+  dataset: Dataset;
 };

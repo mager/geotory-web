@@ -22,7 +22,7 @@ const CreateDatasetModal = ({
           <h3 className="font-serif text-2xl font-bold">Create a Dataset</h3>
         </div>
 
-        <CreateDataset />
+        <CreateDataset setShowModal={setShowModal} />
       </div>
     </Modal>
   );

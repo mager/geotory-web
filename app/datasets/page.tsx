@@ -1,13 +1,4 @@
-import prisma from "@/lib/prisma";
-
-async function getDatasets() {
-  const response = await prisma?.dataset.findMany({});
-  return response;
-}
-
 export default async function Page() {
-  const ds = await getDatasets();
-
   return (
     <div>
       <div>

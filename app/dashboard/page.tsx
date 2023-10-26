@@ -1,7 +1,17 @@
 import { getUser } from "@/lib/utils";
 import UpdateUsername from "@/components/forms/update-username";
-import DashboardWelcome from "@/components/dashboard/dashboard-welcome";
+import DashboardMain from "@/components/dashboard/main";
 import { redirect } from "next/navigation";
+import { User } from "@prisma/client";
+
+async function getDatasets(user: User) {
+  const response = await prisma?.dataset.findMany({
+    where: {
+      userId: user.id,
+    },
+  });
+  return response;
+}
 
 export default async function Page() {
   const user = await getUser();
@@ -9,8 +19,8 @@ export default async function Page() {
   if (!user) {
     // Redirect the user to the homepage
     redirect("/");
-    return null;
   }
+  const datasets = await getDatasets(user);
 
   return (
     <div className="flex w-full flex-col justify-between px-5">
@@ -20,7 +30,7 @@ export default async function Page() {
       {user && !user.slug ? (
         <UpdateUsername user={user} />
       ) : (
-        <DashboardWelcome />
+        <DashboardMain user={user} datasets={datasets} />
       )}
     </div>
   );

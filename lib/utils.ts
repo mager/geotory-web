@@ -93,3 +93,7 @@ export const post = async (url: string, data: any) => {
     body: JSON.stringify(data),
   });
 };
+
+export const getDatasetLink = (username: string | null, slug: string) => {
+  return `/${username}/${slug}`;
+};

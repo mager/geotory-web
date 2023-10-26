@@ -1,5 +1,5 @@
 // @ts-ignore
-import { useState } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
 import { post } from "@/lib/utils";
 import Button from "@/components/shared/button";
@@ -8,7 +8,11 @@ import Loading from "@/components/shared/loading";
 import type { CreateDatasetResp } from "@/app/types";
 import Input from "../shared/input";
 
-export default function CreateDataset() {
+export default function CreateDataset({
+  setShowModal,
+}: {
+  setShowModal: Dispatch<SetStateAction<boolean>>;
+}) {
   const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [source, setSource] = useState("");
@@ -39,14 +43,14 @@ export default function CreateDataset() {
 
     console.log({ result });
 
-    if (true) {
+    if (result.dataset) {
       router.refresh();
+      setShowModal(false);
+    } else {
+      console.error("Failed to create dataset!", { result });
+      setError("Failed to create dataset!");
+      setLoading(false);
     }
-    // } else {
-    //   console.error("Failed to update username!", { result });
-    //   setError("Failed to update username!");
-    //   setLoading(false);
-    // }
   };
 
   if (loading) {

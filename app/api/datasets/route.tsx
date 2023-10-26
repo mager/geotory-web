@@ -23,5 +23,5 @@ export async function POST(request: Request) {
     },
   });
 
-  return NextResponse.json({ user: response });
+  return NextResponse.json({ dataset: response });
 }
