@@ -12,18 +12,32 @@ export default function CreateDataset() {
   const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [source, setSource] = useState("");
+  const [slug, setSlug] = useState(name);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  const setNameAndSlug = (name: string) => {
+    const slug = name
+      .toLowerCase()
+      .replace(/ /g, "-")
+      .replace(/[^\w-]+/g, "");
+    setSlug(slug);
+    setName(name);
+  };
 
   const submit = async () => {
     setLoading(true);
     const data = {
       name,
       source,
+      slug,
+      userId: 1,
     };
     const res = await post("/api/datasets", data);
 
     const result: CreateDatasetResp = await res.json();
+
+    console.log({ result });
 
     if (true) {
       router.refresh();
@@ -47,7 +61,14 @@ export default function CreateDataset() {
           label="Name"
           id="name"
           placeholder="Enter a name"
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => setNameAndSlug(e.target.value)}
+        />
+        <Input
+          label="Slug"
+          id="slug"
+          value={slug}
+          placeholder="This will get updated automatically"
+          onChange={(e) => setSlug(e.target.value)}
         />
         <Input
           label="Source"
