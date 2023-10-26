@@ -9,6 +9,7 @@ import {
 } from "react";
 import { LoadingDots, Github } from "@/components/shared/icons";
 import Image from "next/image";
+import Text from "@/components/shared/text";
 
 const SignInModal = ({
   showSignInModal,
@@ -33,9 +34,9 @@ const SignInModal = ({
             />
           </a>
           <h3 className="font-serif text-2xl font-bold">Geotory</h3>
-          <p className="text-sm text-gray-500">
+          <Text className="text-sm text-gray-500">
             We currently only allow signups with a Github account.
-          </p>
+          </Text>
         </div>
 
         <div className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 md:px-16">
@@ -43,7 +44,7 @@ const SignInModal = ({
             disabled={signInClicked}
             className={`${
               signInClicked
-                ? "cursor-not-allowed border-gray-200 bg-gray-100"
+                ? "border-gray-200 bg-gray-100"
                 : "border border-gray-200 bg-white text-black hover:bg-gray-50"
             } flex h-10 w-full items-center justify-center space-x-3 rounded-md border text-sm shadow-sm transition-all duration-75 focus:outline-none`}
             onClick={() => {
@@ -56,7 +57,7 @@ const SignInModal = ({
             ) : (
               <>
                 <Github className="h-5 w-5" />
-                <p>Sign In with Github</p>
+                <Text>Sign In with Github</Text>
               </>
             )}
           </button>

@@ -7,6 +7,7 @@ import { LayoutDashboard, LogOut } from "lucide-react";
 import Popover from "@/components/shared/popover";
 import Image from "next/image";
 import { Session } from "next-auth";
+import Text from "@/components/shared/text";
 
 export default function UserDropdown({ session }: { session: Session }) {
   const { email, image } = session?.user || {};
@@ -21,26 +22,32 @@ export default function UserDropdown({ session }: { session: Session }) {
           <div className="w-full rounded-md bg-white p-2 sm:w-56">
             <div className="p-2">
               {session?.user?.name && (
-                <p className="truncate font-sansSerif text-sm font-medium text-gray-900">
+                <Text className="truncate text-sm font-medium text-gray-900">
                   {session?.user?.name}
-                </p>
+                </Text>
               )}
-              <p className="truncate font-sansSerif text-sm text-gray-500">
+              <Text className="truncate text-sm text-gray-500">
                 {session?.user?.email}
-              </p>
+              </Text>
             </div>
-            <button className="relative flex w-full cursor-not-allowed items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100">
+            <button className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100">
               <LayoutDashboard className="h-4 w-4" />
-              <p className="font-sansSerif text-sm">
-                <Link href="/dashboard">Dashboard</Link>
-              </p>
+              <Text className="text-sm">
+                <a
+                  onClick={(e) => {
+                    setOpenPopover(false);
+                  }}
+                >
+                  <Link href="/dashboard">Dashboard</Link>
+                </a>
+              </Text>
             </button>
             <button
               className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
               onClick={() => signOut()}
             >
               <LogOut className="h-4 w-4" />
-              <p className="font-sansSerif text-sm">Logout</p>
+              <Text className="text-sm">Logout</Text>
             </button>
           </div>
         }

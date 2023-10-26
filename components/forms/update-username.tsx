@@ -8,7 +8,8 @@ import Error from "@/components/shared/error";
 import Loading from "@/components/shared/loading";
 import type { UpdateUsernameResp } from "@/app/types";
 import type { User } from "@prisma/client";
-import Input from "../shared/input";
+import Input from "@/components/shared/input";
+import Text from "@/components/shared/text";
 
 export default function UpdateUsername({ user }: { user: User }) {
   const [error, setError] = useState("");
@@ -38,7 +39,7 @@ export default function UpdateUsername({ user }: { user: User }) {
 
   return (
     <div>
-      <p className="my-2">Add a username to continue...</p>
+      <Text>Add a username to continue...</Text>
       {error && <Error message={error} />}
       <form action={submit} className="flex flex-col space-y-4">
         <Input

@@ -1,3 +1,4 @@
+import Text from "@/components/shared/text";
 import prisma from "@/lib/prisma";
 import { MapPin } from "lucide-react";
 
@@ -15,10 +16,10 @@ export default async function Home() {
         <h2 className="mb-4 font-serif text-2xl lg:text-4xl">
           Welcome to Geotory!
         </h2>
-        <p className="mb-4 font-sansSerif">
+        <Text>
           Geotory is an open, social repository of shapes, layers, maps, and
           other geo data.
-        </p>
+        </Text>
         <div className="mb-4 flex justify-center">
           <MapPin size={64} strokeWidth={1.5} />
         </div>

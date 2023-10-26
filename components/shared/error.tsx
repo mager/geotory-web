@@ -1,4 +1,5 @@
 import { AlertCircle } from "lucide-react";
+import Text from "@/components/shared/text";
 
 export default function Error({ message }: { message: string }) {
   return (
@@ -6,7 +7,7 @@ export default function Error({ message }: { message: string }) {
       <div className="error-icon mr-2">
         <AlertCircle size={24} />
       </div>
-      <p className="error-message">{message}</p>
+      <Text className="error-message">{message}</Text>
     </div>
   );
 }
