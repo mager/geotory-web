@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { getUser } from "@/lib/utils";
+import { getCurrentUser } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -7,7 +7,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const user = await getUser();
+  const user = await getCurrentUser();
   const body = await request.json();
 
   if (!user) {

@@ -71,7 +71,7 @@ export const truncate = (str: string, length: number) => {
   return `${str.slice(0, length)}...`;
 };
 
-export async function getUser() {
+export async function getCurrentUser() {
   const session = await getServerSession(authOptions);
 
   if (!session || !session.user || !session.user.image) {
@@ -81,6 +81,13 @@ export async function getUser() {
   // Fetch the user from prisma
   const user = await prisma?.user.findUnique({
     where: { email: session.user.email as string },
+  });
+  return user;
+}
+
+export async function getUser(username: string) {
+  const user = await prisma?.user.findUnique({
+    where: { slug: username },
   });
   return user;
 }

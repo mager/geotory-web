@@ -2,8 +2,17 @@
 
 ## Development
 
-```
-nvm use && yarn run dev
+Run `nvm use` to use the correct Node version.
+
+### Running Locally
+
+- `yarn run dev`
+
+### Migrating
+
+- Update `prisma/schema.prisma`
+- `yarn run migrate`
+
 ```
 
 ## Deployment
@@ -11,3 +20,4 @@ nvm use && yarn run dev
 To deploy to prod, push a commit to `main`.
 
 The site is hosted on Vercel.
+```

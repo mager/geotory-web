@@ -1,4 +1,4 @@
-import { getUser } from "@/lib/utils";
+import { getCurrentUser } from "@/lib/utils";
 import UpdateUsername from "@/components/forms/update-username";
 import DashboardMain from "@/components/dashboard/main";
 import { redirect } from "next/navigation";
@@ -14,7 +14,7 @@ async function getDatasets(user: User) {
 }
 
 export default async function Page() {
-  const user = await getUser();
+  const user = await getCurrentUser();
 
   if (!user) {
     // Redirect the user to the homepage

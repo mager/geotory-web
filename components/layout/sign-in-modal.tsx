@@ -35,7 +35,7 @@ const SignInModal = ({
           </a>
           <h3 className="font-serif text-2xl font-bold">Geotory</h3>
           <Text className="text-sm text-gray-500">
-            We currently only allow signups with a Github account.
+            Geotory currently only allow signups with a Github account.
           </Text>
         </div>
 
