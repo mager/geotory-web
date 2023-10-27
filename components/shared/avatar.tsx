@@ -1,3 +1,17 @@
-export default function Avatar({ src }: { src: string }) {
-  return <div className="my-8 flex items-center justify-center">{src}</div>;
+import Image from "next/image";
+
+export default function Avatar({
+  height,
+  src,
+  width,
+}: {
+  height: number;
+  src: string;
+  width: number;
+}) {
+  return (
+    <div className="overflow-hidden rounded-lg border-2 border-gray-200">
+      <Image src={src} alt="Avatar" width={width} height={height} />
+    </div>
+  );
 }

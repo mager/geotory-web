@@ -11,6 +11,10 @@ module.exports = {
       debug: {
         a: "border-2"
       },
+      colors: {
+        primary: '#3490dc',
+        secondary: '#ffed4a',
+      },
       fontFamily: {
         display: ["var(--font-nunito-sans)", "system-ui", "sans-serif"],
         default: ["var(--font-nunito-sans)", "system-ui", "sans-serif"],
