@@ -10,7 +10,7 @@ export default function Avatar({
   width: number;
 }) {
   return (
-    <div className="overflow-hidden rounded-lg border-2 border-gray-200">
+    <div className="h-6 w-6 overflow-hidden rounded-lg border-2 border-gray-200">
       <Image src={src} alt="Avatar" width={width} height={height} />
     </div>
   );

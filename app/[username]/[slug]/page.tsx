@@ -41,9 +41,8 @@ export default async function Dataset({
         <div>
           <h1 className="text-3xl">{dataset.name}</h1>
           <div className="mb-2 flex space-x-2">
-            {user.image && <Avatar src={user.image} width={48} height={48} />}
+            {user.image && <Avatar src={user.image} width={24} height={24} />}
             <Text>{user.slug}</Text>
-            <div>foo</div>
           </div>
         </div>
         <p className="text-md italic text-gray-500">{dataset.description}</p>

@@ -31,7 +31,7 @@ export default async function Dataset({
       <div>
         <div>
           <div className="mb-2 flex space-x-2">
-            {user.image && <Avatar src={user.image} width={40} height={40} />}
+            {user.image && <Avatar src={user.image} width={24} height={24} />}
             <Text>{user.slug}</Text>
           </div>
         </div>

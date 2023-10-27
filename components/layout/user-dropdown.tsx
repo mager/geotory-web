@@ -22,17 +22,17 @@ export default function UserDropdown({ session }: { session: Session }) {
           <div className="w-full rounded-md bg-white p-2 sm:w-56">
             <div className="p-2">
               {session?.user?.name && (
-                <Text className="truncate text-sm font-medium text-gray-900">
+                <p className="truncate text-sm font-medium text-gray-900">
                   {session?.user?.name}
-                </Text>
+                </p>
               )}
-              <Text className="truncate text-sm text-gray-500">
+              <p className="truncate text-sm text-gray-500">
                 {session?.user?.email}
-              </Text>
+              </p>
             </div>
             <button className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100">
               <LayoutDashboard className="h-4 w-4" />
-              <Text className="text-sm">
+              <p className="text-sm">
                 <a
                   onClick={(e) => {
                     setOpenPopover(false);
@@ -40,14 +40,14 @@ export default function UserDropdown({ session }: { session: Session }) {
                 >
                   <Link href="/dashboard">Dashboard</Link>
                 </a>
-              </Text>
+              </p>
             </button>
             <button
               className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100"
               onClick={() => signOut()}
             >
               <LogOut className="h-4 w-4" />
-              <Text className="text-sm">Logout</Text>
+              <p className="text-sm">Logout</p>
             </button>
           </div>
         }

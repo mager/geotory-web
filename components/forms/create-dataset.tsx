@@ -15,6 +15,7 @@ export default function CreateDataset({
 }) {
   const [error, setError] = useState("");
   const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [source, setSource] = useState("");
   const [slug, setSlug] = useState(name);
   const [loading, setLoading] = useState(false);
@@ -73,6 +74,13 @@ export default function CreateDataset({
           value={slug}
           placeholder="This will get updated automatically"
           onChange={(e) => setSlug(e.target.value)}
+        />
+        <Input
+          label="Description"
+          id="description"
+          value={description}
+          placeholder="Describe your dataset"
+          onChange={(e) => setDescription(e.target.value)}
         />
         <Input
           label="Source"

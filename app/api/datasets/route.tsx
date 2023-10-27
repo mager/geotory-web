@@ -17,6 +17,7 @@ export async function POST(request: Request) {
   const response = await prisma.dataset.create({
     data: {
       name: body.name,
+      description: body.description,
       source: body.source,
       userId: user.id,
       slug: body.slug,
