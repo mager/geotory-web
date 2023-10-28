@@ -5,6 +5,10 @@ import { twMerge } from "tailwind-merge";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth/next";
 
+export const getHost = () => {
+  return process.env.NEXT_PUBLIC_HOST || "http://localhost:3000";
+};
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
