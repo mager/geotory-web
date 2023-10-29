@@ -25,11 +25,8 @@ export default async function Dataset({
   return (
     <div className="flex w-full flex-col justify-between px-5">
       <div>
-        <div className="debug-3 text-sm">
-          Datasets / <Link href={`/${username}`}>{username}</Link>
-        </div>
         <div>
-          <h1 className="text-4xl">{dataset.name}</h1>
+          <h1 className="mb-1 text-4xl">{dataset.name}</h1>
           <div className="mb-2 flex space-x-2">
             {dataset.user.image && (
               <Avatar src={dataset.user.image} width={24} height={24} />

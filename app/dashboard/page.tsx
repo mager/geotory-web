@@ -3,6 +3,7 @@ import UpdateUsername from "@/components/forms/update-username";
 import DashboardMain from "@/components/dashboard/main";
 import { redirect } from "next/navigation";
 import { User } from "@prisma/client";
+import prisma from "@/lib/prisma";
 
 async function getDatasets(user: User) {
   const response = await prisma?.dataset.findMany({

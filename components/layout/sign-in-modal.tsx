@@ -57,7 +57,7 @@ const SignInModal = ({
             ) : (
               <>
                 <Github className="h-5 w-5" />
-                <Text>Sign In with Github</Text>
+                <p>Sign In with Github</p>
               </>
             )}
           </button>
