@@ -17,12 +17,14 @@ export default function DashboardMain({
 
   return (
     <div className="my-4">
+      <div className="mb-4">
+        <CreateDatasetModal />
+        <Button onClick={() => setShowModal(true)}>Create a dataset</Button>
+      </div>
       {!datasets ||
         (datasets.length === 0 && (
           <div>
             <Text>You don&lsquo;t have any datasets.</Text>
-            <CreateDatasetModal />
-            <Button onClick={() => setShowModal(true)}>Create a dataset</Button>
           </div>
         ))}
       {datasets && datasets.length > 0 && (

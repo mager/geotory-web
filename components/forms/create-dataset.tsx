@@ -1,7 +1,7 @@
 // @ts-ignore
 import { useState, Dispatch, SetStateAction } from "react";
 import { useRouter } from "next/navigation";
-import { post } from "@/lib/utils";
+import { getDatasetSource, post } from "@/lib/utils";
 import Button from "@/components/shared/button";
 import Error from "@/components/shared/error";
 import Loading from "@/components/shared/loading";
@@ -34,15 +34,13 @@ export default function CreateDataset({
     setLoading(true);
     const data = {
       name,
-      source,
+      description,
+      source: getDatasetSource(source),
       slug,
-      userId: 1,
     };
+
     const res = await post("/api/datasets", data);
-
     const result: CreateDatasetResp = await res.json();
-
-    console.log({ result });
 
     if (result.dataset) {
       router.refresh();

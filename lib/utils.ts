@@ -6,7 +6,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth/next";
 
 export const getHost = () => {
-  return process.env.NEXT_PUBLIC_HOST || "http://localhost:3000";
+  return process.env.NEXT_PUBLIC_HOST || "https://api.geotory.com";
 };
 
 export function cn(...inputs: ClassValue[]) {
@@ -107,4 +107,17 @@ export const post = async (url: string, data: any) => {
 
 export const getDatasetLink = (username: string | null, slug: string) => {
   return `/${username}/${slug}`;
+};
+
+export const getDatasetSource = (source: string) => {
+  // Example input: https://github.com/mager/maps/tree/main/illinois
+  // Example output: mager/maps/illinois
+  const parts = source.split("/");
+  const githubIndex = parts.findIndex((part) => part === "github.com");
+  const owner = parts[githubIndex + 1];
+  const repo = parts[githubIndex + 2];
+  // Path should be everything after tree/main
+  const pathIndex = parts.findIndex((part) => part === "tree");
+  const path = parts.slice(pathIndex + 2).join("/");
+  return `${owner}/${repo}/${path}`;
 };

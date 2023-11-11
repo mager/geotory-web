@@ -1,10 +1,16 @@
 import Avatar from "@/components/shared/avatar";
 import Text from "@/components/shared/text";
 import { getHost, getUser } from "@/lib/utils";
-import Link from "next/link";
+import Image from "next/image";
 
 async function getDataset(username: string, slug: string) {
-  const resp = await fetch(`${getHost()}/datasets/${username}/${slug}`);
+  const url = `${getHost()}/datasets/${username}/${slug}`;
+  const resp = await fetch(url);
+
+  if (resp.status >= 400) {
+    return null;
+  }
+
   const data = await resp.json();
   return data;
 }
@@ -33,6 +39,11 @@ export default async function Dataset({
             )}
             <Text>{username}</Text>
           </div>
+          {dataset.image && (
+            <div>
+              <Image src={dataset.image} alt="Dataset image" />
+            </div>
+          )}
         </div>
         <p className="text-md italic text-gray-500">{dataset.description}</p>
       </div>
