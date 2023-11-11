@@ -11,7 +11,9 @@ async function getDataset(
   slug: string,
 ): Promise<DatasetT | null> {
   const url = `${getHost()}/datasets/${username}/${slug}`;
-  const resp = await fetch(url);
+  const resp = await fetch(url, {
+    next: { revalidate: 10 },
+  });
 
   if (resp.status >= 400) {
     return null;
