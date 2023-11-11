@@ -4,6 +4,7 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth/next";
+import { DatasetT } from "@/app/types";
 
 export const getHost = () => {
   return process.env.NEXT_PUBLIC_HOST || "https://api.geotory.com";
@@ -120,4 +121,22 @@ export const getDatasetSource = (source: string) => {
   const pathIndex = parts.findIndex((part) => part === "tree");
   const path = parts.slice(pathIndex + 2).join("/");
   return `${owner}/${repo}/${path}`;
+};
+
+export const getImageURL = (dataset: DatasetT) => {
+  const parts = dataset.source.split("/");
+  const owner = parts[0];
+  const repo = parts[1];
+  const path = parts.slice(2).join("/");
+
+  return `https://raw.githubusercontent.com/${owner}/${repo}/main/${path}/${dataset.image}`;
+};
+
+export const getDownloadZipURL = (dataset: DatasetT) => {
+  const parts = dataset.source.split("/");
+  const owner = parts[0];
+  const repo = parts[1];
+  const path = parts.slice(2).join("/");
+
+  return `https://api.github.com/repos/${owner}/${repo}/zipball/main/${path}`;
 };
