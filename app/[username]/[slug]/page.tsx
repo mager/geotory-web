@@ -50,7 +50,7 @@ export default async function Dataset({
               {dataset.description}
             </p>
           </div>
-          {dataset.types.length > 0 && (
+          {dataset.types && dataset.types.length > 0 && (
             <div className="mb-4">
               {dataset.types.map((type, i) => (
                 <span
