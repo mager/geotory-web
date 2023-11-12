@@ -109,12 +109,3 @@ export const getImageURL = (dataset: DatasetT) => {
 
   return `https://raw.githubusercontent.com/${owner}/${repo}/main/${path}/${dataset.image}`;
 };
-
-export const getDownloadZipURL = (dataset: DatasetT) => {
-  const parts = dataset.source.split("/");
-  const owner = parts[0];
-  const repo = parts[1];
-  const path = parts.slice(2).join("/");
-
-  return `https://api.github.com/repos/${owner}/${repo}/zipball/main/${path}`;
-};

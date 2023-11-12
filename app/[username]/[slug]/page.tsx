@@ -1,10 +1,10 @@
 import { DatasetT, DatasetType } from "@/app/types";
+import { Downloads } from "@/components/datasets/downloads";
 import Avatar from "@/components/shared/avatar";
 import Text from "@/components/shared/text";
-import { getHost, getUser, getImageURL, getDownloadZipURL } from "@/lib/utils";
+import { getHost, getImageURL } from "@/lib/utils";
 import { Dataset } from "@prisma/client";
 import Image from "next/image";
-import { FolderArchive } from "lucide-react";
 
 async function getDataset(
   username: string,
@@ -76,14 +76,7 @@ export default async function Dataset({
               />
             </div>
           )}
-          <div className="mb-4">
-            <button
-              disabled
-              className="inline-block rounded bg-gray-500 px-4 py-2 text-white hover:bg-gray-300"
-            >
-              <FolderArchive className="h-5 w-5" />
-            </button>
-          </div>
+          <Downloads username={username} slug={slug} />
         </div>
       </div>
     </div>
