@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { getCurrentUser } from "@/lib/utils";
+import { getCurrentUser, getHost } from "@/lib/utils";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -24,7 +24,11 @@ export async function POST(request: Request) {
     },
   });
 
-  // TODO: Sync dataset
+  // Sync dataset
+  await fetch(`${getHost()}/datasets/${user.slug}/${body.slug}`, {
+    method: "PUT",
+    next: { revalidate: 10 },
+  });
 
   return NextResponse.json({ dataset: response });
 }

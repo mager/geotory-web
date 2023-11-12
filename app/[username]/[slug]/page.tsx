@@ -5,6 +5,8 @@ import Text from "@/components/shared/text";
 import { getHost, getImageURL } from "@/lib/utils";
 import { Dataset } from "@prisma/client";
 import Image from "next/image";
+import Link from "next/link";
+import { formatDistance } from "date-fns";
 
 async function getDataset(
   username: string,
@@ -40,12 +42,24 @@ export default async function Dataset({
     <div className="flex w-full flex-col justify-between px-5">
       <div>
         <div>
-          <h1 className="mb-1 text-4xl">{dataset.name}</h1>
+          <h1 className="mb-1 text-5xl">{dataset.name}</h1>
           <div className="mb-2 flex space-x-2">
             {dataset.user.image && (
-              <Avatar src={dataset.user.image} width={24} height={24} />
+              <Link href={`/${username}`}>
+                <Avatar src={dataset.user.image} width={24} height={24} />
+              </Link>
             )}
-            <Text>{username}</Text>
+            <Link href={`/${username}`}>
+              <Text className="mb-0">{username}</Text>
+            </Link>
+          </div>
+          <div className="mb-2">
+            <p className="text-sm italic text-gray-500">
+              Updated{" "}
+              {formatDistance(new Date(dataset.updatedAt), new Date(), {
+                addSuffix: true,
+              })}
+            </p>
           </div>
           <div className="mb-4">
             <p className="text-md italic text-gray-500">
@@ -76,7 +90,7 @@ export default async function Dataset({
               />
             </div>
           )}
-          <Downloads username={username} slug={slug} />
+          <Downloads username={username} slug={slug} dataset={dataset} />
         </div>
       </div>
     </div>

@@ -20,7 +20,6 @@ export const metadata = {
     creator: "@mager",
   },
   metadataBase: new URL("https://geotory.com"),
-  themeColor: "#FFF",
 };
 
 export default async function RootLayout({
