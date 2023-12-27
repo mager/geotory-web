@@ -107,8 +107,8 @@ export default async function Dataset({
             <div className="relative mb-8 h-64 w-full">
               <Map
                 centroid={dataset.centroid}
-                theme="assassins-creed"
-                zoom={6}
+                theme="subtle-greyscale"
+                zoom={4}
                 data={dataset.geojson}
               />
             </div>

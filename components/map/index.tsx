@@ -3,10 +3,9 @@ import { Map as Component } from "@vis.gl/react-google-maps";
 import { APIProvider } from "@vis.gl/react-google-maps";
 import DeckGL from "@deck.gl/react/typed";
 import { PolygonLayer } from "@deck.gl/layers/typed";
-import type { FeatureCollection } from "geojson";
 
 type Props = {
-  data: FeatureCollection;
+  data: any;
   centroid: number[];
   theme: string;
   zoom: number;
@@ -14,7 +13,6 @@ type Props = {
 
 const Map = ({ centroid, data, theme, zoom = 3 }: Props) => {
   const styles = theme ? require(`./map-styles/${theme}`).default : null;
-
   const INITIAL_VIEW_STATE = {
     longitude: centroid[0],
     latitude: centroid[1],
@@ -22,32 +20,35 @@ const Map = ({ centroid, data, theme, zoom = 3 }: Props) => {
     pitch: 0,
     bearing: 0,
   };
-  const layers = [] as PolygonLayer[];
-  // Create layers of PolygonLayer for each feature in the FeatureCollection
-  data.features.forEach((feature) => {
-    layers.push(
-      new PolygonLayer({
-        id: `polygon-layer-${feature?.properties?.id}`,
-        getPolygon: (d) => d.geometry.coordinates,
-        getFillColor: [255, 0, 0, 255],
-        // getLineColor should be red
-        getLineColor: [255, 0, 0, 255],
-        getLineWidth: 3,
-      }),
-    );
+
+  console.log({ data });
+
+  const layer = new PolygonLayer({
+    id: "polygon-layer",
+    data,
+    pickable: true,
+    stroked: true,
+    filled: true,
+    wireframe: true,
+    lineWidthMinPixels: 1,
+    getPolygon: (d) => d.contour,
+    getElevation: (d) => d.population / d.area / 10,
+    getFillColor: (d) => [d.population / d.area / 60, 140, 0],
+    getLineColor: [80, 80, 80],
+    getLineWidth: 1,
   });
+
   const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
   return (
     <APIProvider apiKey={API_KEY}>
       <DeckGL
         initialViewState={INITIAL_VIEW_STATE}
         controller={true}
-        layers={layers}
+        layers={[layer]}
       >
         <Component
           zoom={zoom}
           center={{ lat: centroid[1], lng: centroid[0] }}
-          gestureHandling={"greedy"}
           disableDefaultUI={true}
           styles={styles}
         />
