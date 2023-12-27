@@ -1,7 +1,7 @@
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
-import { sfPro, inter, youngSerif, nunitoSans } from "./fonts";
+import { sfPro, youngSerif, nunitoSans, nunitoSansHeavy } from "./fonts";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
@@ -32,7 +32,12 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={cx(sfPro.variable, youngSerif.variable, nunitoSans.variable)}
+        className={cx(
+          sfPro.variable,
+          youngSerif.variable,
+          nunitoSans.variable,
+          nunitoSansHeavy.variable,
+        )}
       >
         <div className="flex h-screen flex-col justify-between">
           <Suspense fallback="...">

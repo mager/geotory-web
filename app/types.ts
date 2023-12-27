@@ -44,4 +44,5 @@ export type DatasetT = {
   image: string;
   types: DatasetType[];
   geojson: FeatureCollection;
+  centroid: number[];
 };

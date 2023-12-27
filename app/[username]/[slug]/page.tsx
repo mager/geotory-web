@@ -1,13 +1,17 @@
-import { DatasetT, DatasetType } from "@/app/types";
+import cx from "classnames";
+import type { Feature, GeoJSON } from "geojson";
+import Image from "next/image";
+import Link from "next/link";
+
+import { nunitoSansHeavy } from "@/app/fonts";
+import { DatasetT } from "@/app/types";
 import { Downloads } from "@/components/datasets/downloads";
+import Map from "@/components/map";
 import Avatar from "@/components/shared/avatar";
 import Text from "@/components/shared/text";
 import { getHost, getImageURL } from "@/lib/utils";
 import { Dataset } from "@prisma/client";
-import Image from "next/image";
-import Link from "next/link";
-import { formatDistance } from "date-fns";
-import Map from "@/components/datasets/map";
+import { GeoJsonLayer } from "@deck.gl/layers/typed";
 
 async function getDataset(
   username: string,
@@ -39,11 +43,21 @@ export default async function Dataset({
     return notFound;
   }
 
+  const layers = getDeckGlLayers(dataset.geojson);
+  console.log(layers);
+
   return (
     <div className="flex w-full flex-col justify-between px-5">
       <div>
         <div>
-          <h1 className="mb-1 text-5xl">{dataset.name}</h1>
+          <h1
+            className={cx(
+              `mb-1 text-5xl tracking-tight`,
+              nunitoSansHeavy.className,
+            )}
+          >
+            {dataset.name}
+          </h1>
           <div className="mb-2 flex space-x-2">
             {dataset.user.image && (
               <Link href={`/${username}`}>
@@ -56,10 +70,8 @@ export default async function Dataset({
           </div>
           <div className="mb-2">
             <p className="text-sm italic text-gray-500">
-              Updated{" "}
-              {formatDistance(new Date(dataset.updatedAt), new Date(), {
-                addSuffix: true,
-              })}
+              {/* TODO: Get locale */}
+              {`Created ${dataset.createdAt}`}
             </p>
           </div>
           <div className="mb-4">
@@ -92,8 +104,13 @@ export default async function Dataset({
             </div>
           )}
           {dataset.geojson && (
-            <div className="h-48 w-full">
-              <Map />
+            <div className="relative mb-8 h-64 w-full">
+              <Map
+                centroid={dataset.centroid}
+                theme="assassins-creed"
+                zoom={6}
+                data={dataset.geojson}
+              />
             </div>
           )}
           <Downloads username={username} slug={slug} dataset={dataset} />
@@ -101,4 +118,34 @@ export default async function Dataset({
       </div>
     </div>
   );
+}
+
+function getDeckGlLayers(data: GeoJSON | null) {
+  if (!data) return [];
+
+  console.log(data);
+
+  return [
+    new GeoJsonLayer({
+      id: "geojson-layer",
+      data,
+      stroked: false,
+      filled: true,
+      extruded: true,
+      pointType: "circle",
+      lineWidthScale: 20,
+      lineWidthMinPixels: 4,
+      getFillColor: [160, 160, 180, 200],
+      getLineColor: (f: Feature) => {
+        const hex = f?.properties?.color;
+
+        if (!hex) return [0, 0, 0];
+
+        return hex.match(/[0-9a-f]{2}/g)!.map((x: string) => parseInt(x, 16));
+      },
+      getPointRadius: 200,
+      getLineWidth: 1,
+      getElevation: 30,
+    }),
+  ];
 }

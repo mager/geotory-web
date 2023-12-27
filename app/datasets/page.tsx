@@ -17,6 +17,23 @@ export default async function Page() {
           </li>
         </ul>
       </div>
+      <div>
+        <h2>Learn about geodata!</h2>
+        <ul>
+          <li>
+            <a href="https://www.esri.com/en-us/what-is-gis/overview">
+              ESRI - What is GIS?
+            </a>
+            - Great overview of GIS from the experts
+          </li>
+          <li>
+            <a href="https://terraformer-js.github.io/glossary/">
+              Terraformer Glossary
+            </a>
+            - Nice resource for understanding GeoJSON
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }

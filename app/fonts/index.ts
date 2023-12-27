@@ -22,3 +22,9 @@ export const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
   weight: "400",
 });
+
+export const nunitoSansHeavy = Nunito_Sans({
+  variable: "--font-nunito-sans-heavy",
+  subsets: ["latin"],
+  weight: "1000",
+});
