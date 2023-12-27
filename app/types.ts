@@ -1,4 +1,5 @@
 import { Dataset } from "@prisma/client";
+import type { FeatureCollection } from "geojson";
 
 export type User = {
   id: string;
@@ -42,4 +43,5 @@ export type DatasetT = {
   user: DatasetUser;
   image: string;
   types: DatasetType[];
+  geojson: FeatureCollection;
 };

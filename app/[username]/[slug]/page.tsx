@@ -7,6 +7,7 @@ import { Dataset } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { formatDistance } from "date-fns";
+import Map from "@/components/datasets/map";
 
 async function getDataset(
   username: string,
@@ -88,6 +89,11 @@ export default async function Dataset({
                 sizes="100vw"
                 className="h-auto w-full"
               />
+            </div>
+          )}
+          {dataset.geojson && (
+            <div className="h-48 w-full">
+              <Map />
             </div>
           )}
           <Downloads username={username} slug={slug} dataset={dataset} />
