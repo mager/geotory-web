@@ -12,7 +12,7 @@ import Text from "@/components/shared/text";
 import { getHost, getImageURL } from "@/lib/utils";
 import { Dataset } from "@prisma/client";
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
-import MapV2 from "@/components/map/mapv2";
+import Map from "@/components/map";
 
 async function getDataset(
   username: string,
@@ -110,7 +110,7 @@ export default async function Dataset({
                 zoom={4}
                 data={dataset.geojson}
               /> */}
-              <MapV2 geojsonData={dataset.geojson} />
+              <Map geojsonData={dataset.geojson} />
             </div>
           )}
           <Downloads username={username} slug={slug} dataset={dataset} />
