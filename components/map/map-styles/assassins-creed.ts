@@ -362,4 +362,4 @@ export default [
       },
     ],
   },
-];
+] as google.maps.MapTypeStyle[];

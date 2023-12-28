@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-
+import Image from "next/image";
 export const runtime = "edge";
 export const alt = "Geotory";
 export const contentType = "image/png";
@@ -24,7 +24,7 @@ export default async function OG() {
             "linear-gradient(to bottom right, #E0E7FF 25%, #ffffff 50%, #CFFAFE 75%)",
         }}
       >
-        <img
+        <Image
           src={new URL("../public/logo.png", import.meta.url).toString()}
           alt="Geotory Logo"
           tw="w-20 h-20 mb-4 opacity-95"
