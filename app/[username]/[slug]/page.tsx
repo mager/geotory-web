@@ -11,7 +11,6 @@ import Avatar from "@/components/shared/avatar";
 import Text from "@/components/shared/text";
 import { getHost, getImageURL } from "@/lib/utils";
 import { Dataset } from "@prisma/client";
-import { GeoJsonLayer } from "@deck.gl/layers/typed";
 import Map from "@/components/map";
 
 async function getDataset(
@@ -44,7 +43,6 @@ export default async function Dataset({
     return notFound;
   }
 
-  const layers = getDeckGlLayers(dataset.geojson);
   return (
     <div className="flex w-full flex-col justify-between px-5">
       <div>
@@ -118,32 +116,4 @@ export default async function Dataset({
       </div>
     </div>
   );
-}
-
-function getDeckGlLayers(data: GeoJSON | null) {
-  if (!data) return [];
-
-  return [
-    new GeoJsonLayer({
-      id: "geojson-layer",
-      data,
-      stroked: false,
-      filled: true,
-      extruded: true,
-      pointType: "circle",
-      lineWidthScale: 20,
-      lineWidthMinPixels: 4,
-      getFillColor: [160, 160, 180, 200],
-      getLineColor: (f: Feature) => {
-        const hex = f?.properties?.color;
-
-        if (!hex) return [0, 0, 0];
-
-        return hex.match(/[0-9a-f]{2}/g)!.map((x: string) => parseInt(x, 16));
-      },
-      getPointRadius: 200,
-      getLineWidth: 1,
-      getElevation: 30,
-    }),
-  ];
 }
