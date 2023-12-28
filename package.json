@@ -27,6 +27,7 @@
     "@radix-ui/react-dialog": "^1.0.5",
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-tooltip": "^1.0.7",
+    "@react-google-maps/api": "^2.19.2",
     "@types/geojson": "^7946.0.13",
     "@types/node": "18.11.18",
     "@types/react": "18.2.24",

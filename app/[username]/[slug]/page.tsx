@@ -6,12 +6,13 @@ import Link from "next/link";
 import { nunitoSansHeavy } from "@/app/fonts";
 import { DatasetT } from "@/app/types";
 import { Downloads } from "@/components/datasets/downloads";
-import Map from "@/components/map";
+// import Map from "@/components/map";
 import Avatar from "@/components/shared/avatar";
 import Text from "@/components/shared/text";
 import { getHost, getImageURL } from "@/lib/utils";
 import { Dataset } from "@prisma/client";
 import { GeoJsonLayer } from "@deck.gl/layers/typed";
+import MapV2 from "@/components/map/mapv2";
 
 async function getDataset(
   username: string,
@@ -44,8 +45,6 @@ export default async function Dataset({
   }
 
   const layers = getDeckGlLayers(dataset.geojson);
-  console.log(layers);
-
   return (
     <div className="flex w-full flex-col justify-between px-5">
       <div>
@@ -105,12 +104,13 @@ export default async function Dataset({
           )}
           {dataset.geojson && (
             <div className="relative mb-8 h-64 w-full">
-              <Map
+              {/* <Map
                 centroid={dataset.centroid}
                 theme="subtle-greyscale"
                 zoom={4}
                 data={dataset.geojson}
-              />
+              /> */}
+              <MapV2 geojsonData={dataset.geojson} />
             </div>
           )}
           <Downloads username={username} slug={slug} dataset={dataset} />
@@ -122,8 +122,6 @@ export default async function Dataset({
 
 function getDeckGlLayers(data: GeoJSON | null) {
   if (!data) return [];
-
-  console.log(data);
 
   return [
     new GeoJsonLayer({

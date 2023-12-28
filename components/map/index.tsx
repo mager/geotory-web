@@ -21,8 +21,6 @@ const Map = ({ centroid, data, theme, zoom = 3 }: Props) => {
     bearing: 0,
   };
 
-  console.log({ data });
-
   const layer = new PolygonLayer({
     id: "polygon-layer",
     data,
