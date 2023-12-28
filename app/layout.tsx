@@ -2,7 +2,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
 import { sfPro, youngSerif, nunitoSans, nunitoSansHeavy } from "./fonts";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/utils";
 import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
 import { Suspense, cloneElement } from "react";

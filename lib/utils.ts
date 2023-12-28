@@ -1,8 +1,10 @@
+import { NextAuthOptions } from "next-auth";
+import GithubProvider from "next-auth/providers/github";
 import prisma from "@/lib/prisma";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import ms from "ms";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth/next";
 import { DatasetT } from "@/app/types";
 
@@ -108,4 +110,14 @@ export const getImageURL = (dataset: DatasetT) => {
   const path = parts.slice(2).join("/");
 
   return `https://raw.githubusercontent.com/${owner}/${repo}/main/${path}/${dataset.image}`;
+};
+
+export const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(prisma),
+  providers: [
+    GithubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID as string,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+    }),
+  ],
 };
