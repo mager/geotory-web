@@ -1,28 +1,34 @@
 "use client";
 import React, { Suspense } from "react";
 import type { GeoJSON } from "geojson";
-import { GoogleMap, LoadScript, Polygon } from "@react-google-maps/api";
+import { GoogleMap, LoadScript } from "@react-google-maps/api";
+import Text from "../shared/text";
 
 const mapContainerStyle = {
-  width: "400px",
-  height: "300px",
+  width: "100%",
+  height: "400px",
 };
 
-const Map = ({ geojsonData }: { geojsonData: GeoJSON }) => {
+type Props = {
+  geojsonData: GeoJSON;
+  centroid: [number, number];
+  zoom: number;
+};
+
+const Map = ({ centroid, geojsonData, zoom }: Props) => {
   const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || "";
 
   return (
-    <Suspense fallback={<div>Loading map...</div>}>
+    <Suspense fallback={<Text>Loading map...</Text>}>
       <LoadScript googleMapsApiKey={API_KEY}>
         <GoogleMap
           mapContainerStyle={mapContainerStyle}
-          center={{ lat: 40.7484, lng: -73.9857 }}
-          zoom={11}
+          center={{ lat: centroid[1], lng: centroid[0] }}
+          zoom={zoom}
           onLoad={(map) => {
             if (geojsonData) {
               map.data.addGeoJson(geojsonData);
             }
-            console.log(geojsonData);
           }}
         >
           {/* Render GeoJSON features using Polygon components */}

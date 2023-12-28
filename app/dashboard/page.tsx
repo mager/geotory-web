@@ -2,17 +2,7 @@ import { getCurrentUser } from "@/lib/utils";
 import UpdateUsername from "@/components/forms/update-username";
 import DashboardMain from "@/components/dashboard/main";
 import { redirect } from "next/navigation";
-import { User } from "@prisma/client";
-import prisma from "@/lib/prisma";
-
-async function getDatasets(user: User) {
-  const response = await prisma?.dataset.findMany({
-    where: {
-      userId: user.id,
-    },
-  });
-  return response;
-}
+import { getDatasets } from "@/lib/prisma";
 
 export default async function Page() {
   const user = await getCurrentUser();

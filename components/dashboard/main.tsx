@@ -2,9 +2,8 @@
 import { useCreateDatasetModal } from "../datasets/create-dataset-modal";
 import Button from "@/components/shared/button";
 import Text from "@/components/shared/text";
-import { getDatasetLink } from "@/lib/utils";
 import { Dataset, User } from "@prisma/client";
-import Link from "next/link";
+import { renderDataset } from "utils/datasets";
 
 export default function DashboardMain({
   datasets,
@@ -31,15 +30,7 @@ export default function DashboardMain({
         <div>
           <Text>You have {datasets.length} datasets.</Text>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {datasets.map((dataset) => (
-              <div key={dataset.id} className="rounded-lg bg-gray-200 p-4">
-                <Text>
-                  <Link href={getDatasetLink(user.slug, dataset.slug)}>
-                    {dataset.name}
-                  </Link>
-                </Text>
-              </div>
-            ))}
+            {datasets.map((dataset) => renderDataset(user, dataset))}
           </div>
         </div>
       )}

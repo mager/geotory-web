@@ -102,13 +102,11 @@ export default async function Dataset({
           )}
           {dataset.geojson && (
             <div className="relative mb-8 h-64 w-full">
-              {/* <Map
+              <Map
                 centroid={dataset.centroid}
-                theme="subtle-greyscale"
-                zoom={4}
-                data={dataset.geojson}
-              /> */}
-              <Map geojsonData={dataset.geojson} />
+                geojsonData={dataset.geojson}
+                zoom={5}
+              />
             </div>
           )}
           <Downloads username={username} slug={slug} dataset={dataset} />
