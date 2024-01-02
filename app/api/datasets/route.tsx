@@ -32,3 +32,17 @@ export async function POST(request: Request) {
 
   return NextResponse.json({ dataset: response });
 }
+
+export async function DELETE(request: Request) {
+  const user = await getCurrentUser();
+  const body = await request.json();
+
+  if (!user) {
+    return NextResponse.next();
+  }
+
+  await fetch(`${getHost()}/datasets/${user.slug}/${body.slug}`, {
+    method: "DELETE",
+    next: { revalidate: 10 },
+  });
+}

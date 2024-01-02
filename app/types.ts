@@ -22,6 +22,10 @@ export type CreateDatasetResp = {
   dataset: Dataset;
 };
 
+export type DeleteDatasetResp = {
+  dataset: Dataset;
+};
+
 type DatasetUser = {
   image: string;
   slug: string;

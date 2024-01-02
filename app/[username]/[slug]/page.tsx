@@ -1,17 +1,16 @@
 import cx from "classnames";
-import type { Feature, GeoJSON } from "geojson";
 import Image from "next/image";
 import Link from "next/link";
 
 import { nunitoSansHeavy } from "@/app/fonts";
 import { DatasetT } from "@/app/types";
 import { Downloads } from "@/components/datasets/downloads";
-// import Map from "@/components/map";
+import Map from "@/components/map";
 import Avatar from "@/components/shared/avatar";
+import Button from "@/components/shared/button";
 import Text from "@/components/shared/text";
 import { getHost, getImageURL } from "@/lib/utils";
 import { Dataset } from "@prisma/client";
-import Map from "@/components/map";
 
 async function getDataset(
   username: string,
@@ -101,7 +100,7 @@ export default async function Dataset({
             </div>
           )}
           {dataset.geojson && (
-            <div className="relative mb-8 h-64 w-full">
+            <div className="relative mb-8 h-96 w-full">
               <Map
                 centroid={dataset.centroid}
                 geojsonData={dataset.geojson}
@@ -110,6 +109,9 @@ export default async function Dataset({
             </div>
           )}
           <Downloads username={username} slug={slug} dataset={dataset} />
+          <div>
+            <Button>Delete dataset</Button>
+          </div>
         </div>
       </div>
     </div>

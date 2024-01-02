@@ -86,6 +86,12 @@ export const post = async (url: string, data: any) => {
   });
 };
 
+export const del = async (url: string) => {
+  return fetch(url, {
+    method: "DELETE",
+  });
+};
+
 export const getDatasetLink = (username: string | null, slug: string) => {
   return `/${username}/${slug}`;
 };

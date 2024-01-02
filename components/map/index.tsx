@@ -27,7 +27,11 @@ const Map = ({ centroid, geojsonData, zoom }: Props) => {
           zoom={zoom}
           onLoad={(map) => {
             if (geojsonData) {
-              map.data.addGeoJson(geojsonData);
+              try {
+                map.data.addGeoJson(geojsonData);
+              } catch (e) {
+                console.error(e);
+              }
             }
           }}
         >

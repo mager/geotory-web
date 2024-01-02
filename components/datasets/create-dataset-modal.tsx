@@ -21,7 +21,6 @@ const CreateDatasetModal = ({
         <div className="flex flex-col items-center justify-center bg-white px-4 py-4 text-center md:px-16">
           <h3 className="font-serif text-2xl font-bold">Create a Dataset</h3>
         </div>
-
         <CreateDataset setShowModal={setShowModal} />
       </div>
     </Modal>
