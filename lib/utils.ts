@@ -87,7 +87,7 @@ export const post = async (url: string, data: any) => {
 };
 
 export const del = async (url: string) => {
-  return fetch(url, {
+  return await fetch(url, {
     method: "DELETE",
   });
 };

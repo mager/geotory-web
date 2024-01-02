@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useCreateDatasetModal } from "../datasets/create-dataset-modal";
 import Button from "@/components/shared/button";
 import Text from "@/components/shared/text";
@@ -13,12 +14,12 @@ export default function DashboardMain({
   user: User;
 }) {
   const { CreateDatasetModal, setShowModal } = useCreateDatasetModal();
-
+  const router = useRouter();
   return (
     <div className="my-4">
       <div className="mb-4">
         <CreateDatasetModal />
-        <Button onClick={() => setShowModal(true)}>Create a dataset</Button>
+        <Button onClick={() => router.push("/create")}>Create a dataset</Button>
       </div>
       {!datasets ||
         (datasets.length === 0 && (

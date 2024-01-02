@@ -23,5 +23,5 @@ export async function DELETE(request: Request) {
     method: "DELETE",
   });
 
-  return NextResponse.redirect("/dashboard");
+  return new Response(null, { status: 200 });
 }

@@ -1,12 +1,14 @@
-import "./globals.css";
+import Head from "next/head";
 import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
 import { sfPro, youngSerif, nunitoSans, nunitoSansHeavy } from "./fonts";
 import { authOptions } from "@/lib/utils";
 import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
-import { Suspense, cloneElement } from "react";
+import { Suspense } from "react";
 import { getServerSession } from "next-auth/next";
+
+import "./globals.css";
 
 export const metadata = {
   title: "Geotory",
@@ -31,6 +33,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <Head>
+        <link rel="shortcut icon" href="public/favicon.ico" />
+      </Head>
       <body
         className={cx(
           sfPro.variable,

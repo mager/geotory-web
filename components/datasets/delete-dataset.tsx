@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { del } from "@/lib/utils";
-import { DeleteDatasetResp } from "@/app/types";
 import ModalV2 from "@/components/shared/modal-v2";
 import Button from "@/components/shared/button";
 import Error from "../shared/error";
@@ -20,13 +19,12 @@ const DeleteDataset = ({ slug, username }: Props) => {
 
   const submit = async () => {
     const res = await del(`/api/datasets/${username}/${slug}`);
-    const result: DeleteDatasetResp = await res.json();
 
-    if (result.dataset) {
+    if (res.ok) {
       router.push("/dashboard");
       setShowModal(false);
     } else {
-      console.error("Failed to delete dataset!", { result });
+      console.error("Failed to delete dataset!", { res });
       setError("Failed to delete dataset!");
     }
   };
