@@ -7,7 +7,7 @@ import { DatasetT } from "@/app/types";
 import { Downloads } from "@/components/datasets/downloads";
 import Map from "@/components/map";
 import Avatar from "@/components/shared/avatar";
-import Button from "@/components/shared/button";
+import DeleteDataset from "@/components/datasets/delete-dataset";
 import Text from "@/components/shared/text";
 import { getHost, getImageURL } from "@/lib/utils";
 import { Dataset } from "@prisma/client";
@@ -108,10 +108,8 @@ export default async function Dataset({
               />
             </div>
           )}
-          <Downloads username={username} slug={slug} dataset={dataset} />
-          <div>
-            <Button>Delete dataset</Button>
-          </div>
+          <Downloads slug={slug} dataset={dataset} username={username} />
+          <DeleteDataset slug={slug} username={username} />
         </div>
       </div>
     </div>

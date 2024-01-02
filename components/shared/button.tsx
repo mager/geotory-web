@@ -1,8 +1,8 @@
-import { on } from "events";
 import React from "react";
 
 export default function Button({
   children,
+  danger,
   disabled,
   isSubmit,
   onClick,
@@ -10,9 +10,12 @@ export default function Button({
   children: React.ReactNode;
   isSubmit?: boolean;
   disabled?: boolean;
+  danger?: boolean;
   onClick?: (e: React.FormEvent) => void;
 }) {
-  const className = `rounded-lg bg-green-400 px-4 py-2 font-semibold text-white shadow-md hover:bg-green-600`;
+  const bgColor = danger ? "bg-red-400" : "bg-green-400";
+  const hoverBgColor = danger ? "hover:bg-red-500" : "hover:bg-green-500";
+  const className = `rounded-lg ${bgColor} px-4 py-2 font-semibold text-white shadow-md ${hoverBgColor}`;
 
   return (
     <button
