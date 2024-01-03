@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
 import { sfPro, youngSerif, nunitoSans, nunitoSansHeavy } from "./fonts";
@@ -33,9 +32,6 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <Head>
-        <link rel="shortcut icon" href="public/favicon.ico" />
-      </Head>
       <body
         className={cx(
           sfPro.variable,
