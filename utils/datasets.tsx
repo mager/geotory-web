@@ -5,14 +5,19 @@ import { getDatasetLink } from "@/lib/utils";
 import { Dataset, User } from "@prisma/client";
 
 const renderDataset = (user: User, dataset: Dataset) => (
-  <div
+  <a
+    href={getDatasetLink(user.slug, dataset.slug)}
     key={dataset.id}
-    className="rounded-md border-2 border-gray-200 px-2 py-4"
+    className="flex transform flex-col overflow-hidden rounded-md border border-gray-300 from-blue-200 to-blue-300 transition-transform hover:scale-105 hover:bg-gradient-to-r hover:shadow-lg"
   >
-    <Text className="mb-0">
-      <Link href={getDatasetLink(user.slug, dataset.slug)}>{dataset.name}</Link>
-    </Text>
-  </div>
+    <div className="flex-grow p-4">
+      <Text className="mb-2 text-lg font-semibold">{dataset.name}</Text>
+      {/* Add more information or details about the dataset if needed */}
+    </div>
+    <div className="bg-gray-200 p-2 text-center">
+      <Text className="text-sm">{dataset.description}</Text>
+    </div>
+  </a>
 );
 
 export { renderDataset };

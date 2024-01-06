@@ -2,6 +2,7 @@
 import { FolderArchive, GithubIcon } from "lucide-react";
 import { getHost } from "@/lib/utils";
 import { DatasetT } from "@/app/types";
+import H3 from "../shared/h3";
 
 async function downloadCSV(username: string, slug: string) {
   const url = `${getHost()}/datasets/${username}/${slug}/zip`;
@@ -23,19 +24,17 @@ export const Downloads = ({
   // const isGithub = source.match(/github.com/);
 
   return (
-    <div className="mb-4">
-      <h3 className="bold mb-2 font-sansSerif text-2xl">Downloads</h3>
-      <div className="flex gap-x-4">
-        <div>
-          <button
-            onClick={() => downloadCSV(username, slug)}
-            className="inline-block rounded bg-gray-400 px-4 py-2 text-white hover:bg-gray-300"
-            title="Download CSV"
-          >
-            <FolderArchive className="h-8 w-8" />
-          </button>
-        </div>
-        {/* <div>
+    <div className="mb-4 flex gap-x-4">
+      <div>
+        <button
+          onClick={() => downloadCSV(username, slug)}
+          className="inline-block rounded bg-gray-400 px-4 py-2 text-white hover:bg-gray-300"
+          title="Download CSV"
+        >
+          <FolderArchive className="h-8 w-8" />
+        </button>
+      </div>
+      {/* <div>
         <button
           onClick={() => downloadCSV(username, slug)}
           className="inline-block rounded bg-gray-400 px-4 py-2 text-white hover:bg-gray-300"
@@ -44,7 +43,6 @@ export const Downloads = ({
           <GithubIcon className="h-8 w-8" />
         </button>
       </div> */}
-      </div>
     </div>
   );
 };

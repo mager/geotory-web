@@ -44,7 +44,7 @@ export default async function RootLayout({
           <Suspense fallback="...">
             <Nav session={session} user={user} />
           </Suspense>
-          <main className="mb-auto flex w-full flex-col items-center justify-center py-24">
+          <main className="mb-auto flex w-full flex-col items-center justify-center py-20">
             {children}
           </main>
           <Footer />

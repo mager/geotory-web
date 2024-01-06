@@ -9,6 +9,7 @@ import Map from "@/components/map";
 import DeleteDataset from "@/components/datasets/delete-dataset";
 import { getHost, getImageURL } from "@/lib/utils";
 import { Dataset } from "@prisma/client";
+import H3 from "@/components/shared/h3";
 
 async function getDataset(
   username: string,
@@ -96,13 +97,20 @@ export default async function Dataset({
             ))}
           </div>
         )}
+        <H3>Properties</H3>
+        <div>TODO</div>
       </div>
-      <div className="props order-last md:col-span-1">
-        <h2>TODO: Properties</h2>
-        <Downloads slug={slug} dataset={dataset} username={username} />
-        <DeleteDataset slug={slug} username={username} />
+      <div className="downloads order-last md:col-span-1">
+        <div>
+          <H3>Downloads</H3>
+          <Downloads slug={slug} dataset={dataset} username={username} />
+        </div>
+        <div>
+          <H3>Actions</H3>
+          <DeleteDataset slug={slug} username={username} />
+        </div>
       </div>
-      <div className="map lg-col-span-3 order-2 w-full md:col-span-2 lg:col-span-3">
+      <div className="map order-2 w-full md:col-span-2 md:row-span-2 lg:col-span-3 ">
         {dataset.image && (
           <div className="my-8">
             <Image
@@ -116,11 +124,11 @@ export default async function Dataset({
           </div>
         )}
         {dataset.geojson && (
-          <div className="relative mb-8 h-96 w-full">
+          <div className="relative mb-8 h-full w-full">
             <Map
               centroid={dataset.centroid}
               geojsonData={dataset.geojson}
-              zoom={5}
+              zoom={6}
             />
           </div>
         )}

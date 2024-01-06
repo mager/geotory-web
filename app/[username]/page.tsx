@@ -43,7 +43,7 @@ export default async function Dataset({
           <div>
             {datasets && datasets.length > 0 && (
               <div>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
                   {datasets.map((dataset) => renderDataset(user, dataset))}
                 </div>
               </div>
