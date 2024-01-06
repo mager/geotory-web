@@ -3,13 +3,19 @@
 import Link from "next/link";
 import { useState } from "react";
 import { signOut } from "next-auth/react";
-import { LayoutDashboard, LogOut } from "lucide-react";
+import { LayoutDashboard, LogOut, UserIcon } from "lucide-react";
 import Popover from "@/components/shared/popover";
 import Image from "next/image";
 import { Session } from "next-auth";
-import Text from "@/components/shared/text";
+import { User } from "@prisma/client";
 
-export default function UserDropdown({ session }: { session: Session }) {
+export default function UserDropdown({
+  session,
+  user,
+}: {
+  session: Session | null;
+  user: User | null;
+}) {
   const { email, image } = session?.user || {};
   const [openPopover, setOpenPopover] = useState(false);
 
@@ -31,15 +37,29 @@ export default function UserDropdown({ session }: { session: Session }) {
               </p>
             </div>
             <button className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100">
-              <LayoutDashboard className="h-4 w-4" />
+              <UserIcon className="h-4 w-4" />
               <p className="text-sm">
-                <a
+                <Link
                   onClick={(e) => {
                     setOpenPopover(false);
                   }}
+                  href={`/${user?.slug}`}
                 >
-                  <Link href="/dashboard">Dashboard</Link>
-                </a>
+                  Profile
+                </Link>
+              </p>
+            </button>
+            <button className="relative flex w-full items-center justify-start space-x-2 rounded-md p-2 text-left text-sm transition-all duration-75 hover:bg-gray-100">
+              <LayoutDashboard className="h-4 w-4" />
+              <p className="text-sm">
+                <Link
+                  onClick={(e) => {
+                    setOpenPopover(false);
+                  }}
+                  href="/dashboard"
+                >
+                  Dashboard
+                </Link>
               </p>
             </button>
             <button

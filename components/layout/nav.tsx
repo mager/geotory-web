@@ -1,6 +1,13 @@
-import Navbar from "./navbar";
 import { Session } from "next-auth";
+import { User } from "@prisma/client";
+import Navbar from "./navbar";
 
-export default async function Nav({ session }: { session: Session | null }) {
-  return <Navbar session={session} />;
-}
+const Nav = async ({
+  session,
+  user,
+}: {
+  session: Session | null;
+  user: User | null;
+}) => <Navbar session={session} user={user} />;
+
+export default Nav;

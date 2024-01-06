@@ -1,7 +1,7 @@
 import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
 import { sfPro, youngSerif, nunitoSans, nunitoSansHeavy } from "./fonts";
-import { authOptions } from "@/lib/utils";
+import { authOptions, getCurrentUser } from "@/lib/utils";
 import Nav from "@/components/layout/nav";
 import Footer from "@/components/layout/footer";
 import { Suspense } from "react";
@@ -29,7 +29,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOptions);
-
+  const user = await getCurrentUser();
   return (
     <html lang="en">
       <body
@@ -42,7 +42,7 @@ export default async function RootLayout({
       >
         <div className="flex h-screen flex-col justify-between">
           <Suspense fallback="...">
-            <Nav session={session} />
+            <Nav session={session} user={user} />
           </Suspense>
           <main className="mb-auto flex w-full flex-col items-center justify-center py-24">
             {children}

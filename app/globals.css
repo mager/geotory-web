@@ -3,15 +3,41 @@
 @tailwind utilities;
 
 @layer components {
-    .debug {
+
+    .debug,
+    .debug-0 {
         border: 2px solid red;
     }
 
+    .debug-1 {
+        border: 2px solid orange;
+    }
+
     .debug-2 {
-        border: 2px solid cyan;
+        border: 2px solid yellow;
     }
 
     .debug-3 {
-        border: 2px solid lime;
+        border: 2px solid green;
+    }
+
+    .debug-4 {
+        border: 2px solid blue;
+    }
+
+    .debug-5 {
+        border: 2px solid indigo;
+    }
+
+    .debug-6 {
+        border: 2px solid purple;
+    }
+
+    .debug-8 {
+        border: 2px solid pink;
+    }
+
+    .debug-9 {
+        border: 2px dashed black;
     }
 }

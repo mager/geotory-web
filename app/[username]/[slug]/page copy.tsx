@@ -41,8 +41,8 @@ export default async function Dataset({
   }
 
   return (
-    <div className="lg:grid-col-span-4 grid w-full px-5 md:grid-cols-3 lg:grid-cols-4">
-      <div className="title order-1 md:col-span-1">
+    <div className="flex w-full flex-col justify-between px-5 md:flex-row">
+      <div className="debug-3 md:w-1/3 lg:w-1/4">
         <h1
           className={cx(
             `mb-1 text-3xl tracking-tight`,
@@ -96,13 +96,11 @@ export default async function Dataset({
             ))}
           </div>
         )}
-      </div>
-      <div className="props order-last md:col-span-1">
         <h2>TODO: Properties</h2>
         <Downloads slug={slug} dataset={dataset} username={username} />
         <DeleteDataset slug={slug} username={username} />
       </div>
-      <div className="map lg-col-span-3 order-2 w-full md:col-span-2 lg:col-span-3">
+      <div className="debug-2 w-full md:w-2/3 lg:w-3/4">
         {dataset.image && (
           <div className="my-8">
             <Image

@@ -8,13 +8,19 @@ import UserDropdown from "./user-dropdown";
 import { Session } from "next-auth";
 import Button from "../shared/button";
 import Image from "next/image";
+import { User } from "@prisma/client";
 
-export default function NavBar({ session }: { session: Session | null }) {
+export default function NavBar({
+  session,
+  user,
+}: {
+  session: Session | null;
+  user: User | null;
+}) {
   const { SignInModal, setShowSignInModal } = useSignInModal();
   const scrolled = useScroll(50);
-
   return (
-    <>
+    <div>
       <SignInModal />
       <div
         className={`fixed top-0 flex w-full justify-center ${
@@ -37,13 +43,13 @@ export default function NavBar({ session }: { session: Session | null }) {
           </Link>
           <div>
             {session ? (
-              <UserDropdown session={session} />
+              <UserDropdown session={session} user={user} />
             ) : (
               <Button onClick={() => setShowSignInModal(true)}>Sign In</Button>
             )}
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

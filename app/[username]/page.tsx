@@ -1,6 +1,7 @@
+import Image from "next/image";
 import cx from "classnames";
-import { nunitoSansHeavy } from "../fonts";
-import Avatar from "@/components/shared/avatar";
+
+import { nunitoSansHeavy } from "@/app/fonts";
 import { getUser } from "@/lib/utils";
 import { getDatasets } from "@/lib/prisma";
 import { renderDataset } from "utils/datasets";
@@ -25,10 +26,14 @@ export default async function Dataset({
       <div>
         <div>
           <div className="mb-8 flex space-x-2">
-            {user.image && <Avatar src={user.image} width={48} height={48} />}
+            {user.image && (
+              <div className="h-9 w-9">
+                <Image src={user.image} width={36} height={36} alt="Avatar" />
+              </div>
+            )}
             <h1
               className={cx(
-                `mb-1 text-5xl tracking-tight`,
+                `mb-1 text-3xl tracking-tight`,
                 nunitoSansHeavy.className,
               )}
             >

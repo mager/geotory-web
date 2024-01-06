@@ -14,7 +14,7 @@ export default function Avatar({
     <div
       className={cx(
         `h-${height} w-${width}`,
-        "overflow-hidden rounded-lg border-2 border-gray-200",
+        "overflow-hidden rounded-full border border-gray-200",
       )}
     >
       <Image src={src} alt="Avatar" width={width} height={height} />
