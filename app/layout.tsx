@@ -12,12 +12,12 @@ import "./globals.css";
 export const metadata = {
   title: "Geotory",
   description:
-    "Geotory is an open, social repository of shapes, layers, maps, and other geo data.",
+    "Geotory is an open, social repository of shapes, layers, maps, and other geodata.",
   twitter: {
     card: "summary_large_image",
     title: "Geotory",
     description:
-      "Geotory is an open, social repository of shapes, layers, maps, and other geo data.",
+      "Geotory is an open, social repository of shapes, layers, maps, and other geodata.",
     creator: "@mager",
   },
   metadataBase: new URL("https://geotory.com"),

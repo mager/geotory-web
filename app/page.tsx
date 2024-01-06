@@ -1,6 +1,6 @@
+import Image from "next/image";
 import Text from "@/components/shared/text";
 import prisma from "@/lib/prisma";
-import { MapPin } from "lucide-react";
 
 async function getUser(userID: string) {
   const response = await prisma?.account.findFirst({
@@ -12,15 +12,23 @@ async function getUser(userID: string) {
 export default async function Home() {
   return (
     <div className="w-full px-5 text-center">
-      <h2 className="mb-4 font-serif text-2xl lg:text-4xl">
+      <h2 className="mb-4 font-serif text-2xl sm:text-3xl lg:text-5xl">
         Welcome to Geotory!
       </h2>
-      <Text>
-        Geotory is an open, social repository of shapes, layers, maps, and other
-        geo data.
-      </Text>
+      <div className="mb-8">
+        <Text>
+          Geotory is an open, social repository of shapes, layers, maps, and
+          other geodata.
+        </Text>
+      </div>
       <div className="mb-4 flex justify-center">
-        <MapPin size={64} strokeWidth={1.5} />
+        <Image
+          src="/map-400x400.png"
+          width={400}
+          height={400}
+          className="w-48 md:w-64"
+          alt="Geotory Logo"
+        />
       </div>
     </div>
   );

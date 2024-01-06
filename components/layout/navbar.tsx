@@ -7,6 +7,7 @@ import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
 import { Session } from "next-auth";
 import Button from "../shared/button";
+import Image from "next/image";
 
 export default function NavBar({ session }: { session: Session | null }) {
   const { SignInModal, setShowSignInModal } = useSignInModal();
@@ -25,7 +26,12 @@ export default function NavBar({ session }: { session: Session | null }) {
         <div className="mx-5 flex h-16 w-full items-center justify-between">
           <Link href="/" className="flex items-center font-display text-2xl">
             <div className="mr-2">
-              <Map />
+              <Image
+                src="/map-24x24.png"
+                width={24}
+                height={24}
+                alt="Geotory Logo"
+              />
             </div>
             <h1 className="font-serif text-3xl">Geotory</h1>
           </Link>
