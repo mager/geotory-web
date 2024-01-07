@@ -3,39 +3,24 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { nunitoSans } from "@/app/fonts";
-import { DatasetT } from "@/app/types";
 import { Downloads } from "@/components/datasets/downloads";
 import Map from "@/components/map";
-import DeleteDataset from "@/components/datasets/delete-dataset";
+// import DeleteDataset from "@/components/datasets/delete-dataset";
 import H1 from "@/components/shared/h1";
 import H3 from "@/components/shared/h3";
-import { getHost, getImageURL } from "@/lib/utils";
-import { Dataset } from "@prisma/client";
+import { getDataset, getImageURL } from "@/lib/utils";
+import GeoJSONTable from "@/components/datasets/geojson-table";
 
-async function getDataset(
-  username: string,
-  slug: string,
-): Promise<DatasetT | null> {
-  const url = `${getHost()}/datasets/${username}/${slug}`;
-  const resp = await fetch(url, {
-    next: { revalidate: 10 },
-  });
-
-  if (resp.status >= 400) {
-    return null;
-  }
-
-  const data = await resp.json();
-  return data;
-}
+type Props = {
+  params: {
+    username: string;
+    slug: string;
+  };
+};
 
 const notFound = <div>Dataset not found</div>;
 
-export default async function Dataset({
-  params: { username, slug },
-}: {
-  params: { username: string; slug: string };
-}) {
+const Dataset = async ({ params: { username, slug } }: Props) => {
   const dataset = await getDataset(username, slug);
 
   if (!dataset) {
@@ -43,8 +28,15 @@ export default async function Dataset({
   }
 
   return (
-    <div className="lg:grid-col-span-4 grid w-full px-5 md:grid-cols-3 lg:grid-cols-4">
-      <div className="title order-1 md:col-span-1">
+    <div
+      className={cx(
+        // "debug md:debug-1 lg:debug-2 xl:debug-3",
+        "grid w-full grid-cols-1 gap-4 overflow-hidden px-5",
+        "lg:grid-cols-2",
+        "xl:grid-cols-3",
+      )}
+    >
+      <div className="title order-1">
         <H1>{dataset.name}</H1>
         <div className="mb-2 flex items-center space-x-2">
           {dataset.user.image && (
@@ -91,20 +83,9 @@ export default async function Dataset({
             ))}
           </div>
         )}
-        <H3>Properties</H3>
-        <div>TODO</div>
+        <Downloads slug={slug} dataset={dataset} username={username} />
       </div>
-      <div className="downloads order-last md:col-span-1">
-        <div>
-          <H3>Downloads</H3>
-          <Downloads slug={slug} dataset={dataset} username={username} />
-        </div>
-        <div>
-          <H3>Actions</H3>
-          <DeleteDataset slug={slug} username={username} />
-        </div>
-      </div>
-      <div className="map order-2 w-full md:col-span-2 md:row-span-2 lg:col-span-3 ">
+      <div className="map order-2 h-64 w-full lg:h-96 xl:col-span-2">
         {dataset.image && (
           <div className="my-8">
             <Image
@@ -127,6 +108,16 @@ export default async function Dataset({
           </div>
         )}
       </div>
+      <div className="properties order-3 overflow-scroll lg:col-span-2 xl:col-span-3">
+        <H3>Properties</H3>
+        <GeoJSONTable features={dataset.geojson.features} />
+      </div>
+      {/* <div>
+        <H3>Actions</H3>
+        <DeleteDataset slug={slug} username={username} />
+      </div> */}
     </div>
   );
-}
+};
+
+export default Dataset;

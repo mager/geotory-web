@@ -127,3 +127,20 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
 };
+
+export const getDataset = async (
+  username: string,
+  slug: string,
+): Promise<DatasetT | null> => {
+  const url = `${getHost()}/datasets/${username}/${slug}`;
+  const resp = await fetch(url, {
+    next: { revalidate: 10 },
+  });
+
+  if (resp.status >= 400) {
+    return null;
+  }
+
+  const data = await resp.json();
+  return data;
+};

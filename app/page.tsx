@@ -32,16 +32,13 @@ export default async function Home() {
         />
       </div>
       <div className="flex items-center justify-center space-x-8">
-        <button
-          disabled
-          className="text-sansSerif rounded-md bg-gray-300 px-4 py-2 text-xl font-bold text-gray-200"
-          // className="text-sansSerif rounded-md bg-blue-500 px-4 py-2 text-xl font-bold hover:bg-blue-600 hover:bg-opacity-75"
-        >
-          Explore Datasets
-        </button>
-
+        <Link href="/discover">
+          <button className="rounded-md bg-blue-300 px-4 py-2 text-xl font-bold text-gray-700 hover:bg-blue-500">
+            Browse Datasets
+          </button>
+        </Link>
         <Link href="/create">
-          <button className="text-sansSerif rounded-md bg-green-300 px-4 py-2 text-xl font-bold text-gray-700 hover:bg-green-500">
+          <button className="rounded-md bg-green-300 px-4 py-2 text-xl font-bold text-gray-700 hover:bg-green-500">
             Create a Dataset
           </button>
         </Link>

@@ -24,7 +24,7 @@ export const Downloads = ({
   // const isGithub = source.match(/github.com/);
 
   return (
-    <div className="mb-4 flex gap-x-4">
+    <div className="mb-4 hidden gap-x-4 lg:flex">
       <div>
         <button
           onClick={() => downloadCSV(username, slug)}
