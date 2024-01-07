@@ -1,5 +1,5 @@
 import localFont from "next/font/local";
-import { Inter, Nunito_Sans, Young_Serif } from "next/font/google";
+import { Roboto_Mono, Inter, Nunito_Sans, Young_Serif } from "next/font/google";
 
 export const sfPro = localFont({
   src: "./SF-Pro-Display-Medium.otf",
@@ -27,4 +27,10 @@ export const nunitoSansHeavy = Nunito_Sans({
   variable: "--font-nunito-sans-heavy",
   subsets: ["latin"],
   weight: "1000",
+});
+
+export const robotoMono = Roboto_Mono({
+  variable: "--font-roboto-mono",
+  subsets: ["latin"],
+  weight: "400",
 });

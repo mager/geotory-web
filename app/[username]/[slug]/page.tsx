@@ -2,14 +2,15 @@ import cx from "classnames";
 import Image from "next/image";
 import Link from "next/link";
 
-import { nunitoSans, nunitoSansHeavy } from "@/app/fonts";
+import { nunitoSans } from "@/app/fonts";
 import { DatasetT } from "@/app/types";
 import { Downloads } from "@/components/datasets/downloads";
 import Map from "@/components/map";
 import DeleteDataset from "@/components/datasets/delete-dataset";
+import H1 from "@/components/shared/h1";
+import H3 from "@/components/shared/h3";
 import { getHost, getImageURL } from "@/lib/utils";
 import { Dataset } from "@prisma/client";
-import H3 from "@/components/shared/h3";
 
 async function getDataset(
   username: string,
@@ -44,14 +45,7 @@ export default async function Dataset({
   return (
     <div className="lg:grid-col-span-4 grid w-full px-5 md:grid-cols-3 lg:grid-cols-4">
       <div className="title order-1 md:col-span-1">
-        <h1
-          className={cx(
-            `mb-1 text-3xl tracking-tight`,
-            nunitoSansHeavy.className,
-          )}
-        >
-          {dataset.name}
-        </h1>
+        <H1>{dataset.name}</H1>
         <div className="mb-2 flex items-center space-x-2">
           {dataset.user.image && (
             <Link href={`/${username}`}>
@@ -128,7 +122,7 @@ export default async function Dataset({
             <Map
               centroid={dataset.centroid}
               geojsonData={dataset.geojson}
-              zoom={6}
+              zoom={dataset.zoom}
             />
           </div>
         )}

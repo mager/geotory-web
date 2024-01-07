@@ -1,25 +1,29 @@
-// @ts-ignore
-import { useState, Dispatch, SetStateAction } from "react";
+"use client";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { getCurrentUser, getDatasetSource, post } from "@/lib/utils";
+
+import { CreateDatasetResp } from "@/app/types";
 import Button from "@/components/shared/button";
 import Error from "@/components/shared/error";
+import Input from "@/components/shared/input";
 import Loading from "@/components/shared/loading";
-import type { CreateDatasetResp } from "@/app/types";
-import Input from "../shared/input";
+import { getDatasetSource, post } from "@/lib/utils";
+import { User } from "@prisma/client";
 
-export default function CreateDataset({
-  setShowModal,
-}: {
-  setShowModal: Dispatch<SetStateAction<boolean>>;
-}) {
-  const [error, setError] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [source, setSource] = useState("");
-  const [slug, setSlug] = useState(name);
-  const [loading, setLoading] = useState(false);
+type Props = {
+  user: User;
+};
+
+const CreateDataset = ({ user }: Props) => {
   const router = useRouter();
+
+  // State
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [slug, setSlug] = useState(name);
+  const [source, setSource] = useState("");
 
   const setNameAndSlug = (name: string) => {
     const slug = name
@@ -31,8 +35,7 @@ export default function CreateDataset({
   };
 
   const submit = async () => {
-    console.log("Creating dataset...");
-
+    setLoading(true);
     const data = {
       name,
       description,
@@ -40,27 +43,24 @@ export default function CreateDataset({
       slug,
     };
 
-    console.log({ data });
     const res = await post("/api/datasets", data);
     const result: CreateDatasetResp = await res.json();
+    setLoading(false);
 
     if (result.dataset) {
-      router.push(`/dashboard`);
-      // router.push(`/${user.slug}/${slug}`);
-      setShowModal(false);
+      router.push(`/${user.slug}/${slug}`);
     } else {
       console.error("Failed to create dataset!", { result });
       setError("Failed to create dataset!");
-      setLoading(false);
     }
   };
 
   if (loading) {
-    return <Loading />;
+    return <Loading message="Doing some geometry..." />;
   }
 
   return (
-    <div className="px-4">
+    <div className="py-4">
       {error && <Error message={error} />}
       <form action={submit} className="mb-2 flex flex-col">
         <Input
@@ -82,6 +82,7 @@ export default function CreateDataset({
           value={description}
           placeholder="Describe your dataset"
           onChange={(e) => setDescription(e.target.value)}
+          multiline
         />
         <Input
           label="Source"
@@ -91,9 +92,11 @@ export default function CreateDataset({
         />
 
         <Button isSubmit disabled={loading}>
-          Add
+          Create
         </Button>
       </form>
     </div>
   );
-}
+};
+
+export default CreateDataset;

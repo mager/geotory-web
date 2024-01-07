@@ -14,12 +14,22 @@ module.exports = {
       colors: {
         primary: '#3490dc',
         secondary: '#ffed4a',
+        blue: {
+          500: '#00C0FF',
+          700: '#0070A5'
+        },
+        green: {
+          300: '#AAFFAF',
+          500: '#2AB27B',
+          700: '#7FAF8C'
+        },
       },
       fontFamily: {
         display: ["var(--font-nunito-sans)", "system-ui", "sans-serif"],
         default: ["var(--font-nunito-sans)", "system-ui", "sans-serif"],
         serif: ["var(--font-young-serif)", "serif"],
         sansSerif: ["var(--font-nunito-sans)", "serif"],
+        mono: ["var(--font-roobert-mono)", "monospace"],
       },
       animation: {
         // Fade up and down

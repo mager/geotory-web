@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import Text from "@/components/shared/text";
 import prisma from "@/lib/prisma";
@@ -21,7 +22,7 @@ export default async function Home() {
           other geodata.
         </Text>
       </div>
-      <div className="mb-4 flex justify-center">
+      <div className="mb-16 flex justify-center">
         <Image
           src="/map-400x400.png"
           width={400}
@@ -29,6 +30,21 @@ export default async function Home() {
           className="w-48 md:w-64"
           alt="Geotory Logo"
         />
+      </div>
+      <div className="flex items-center justify-center space-x-8">
+        <button
+          disabled
+          className="text-sansSerif rounded-md bg-gray-300 px-4 py-2 text-xl font-bold text-gray-200"
+          // className="text-sansSerif rounded-md bg-blue-500 px-4 py-2 text-xl font-bold hover:bg-blue-600 hover:bg-opacity-75"
+        >
+          Explore Datasets
+        </button>
+
+        <Link href="/create">
+          <button className="text-sansSerif rounded-md bg-green-300 px-4 py-2 text-xl font-bold text-gray-700 hover:bg-green-500">
+            Create a Dataset
+          </button>
+        </Link>
       </div>
     </div>
   );

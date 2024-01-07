@@ -49,4 +49,5 @@ export type DatasetT = {
   types: DatasetType[];
   geojson: FeatureCollection;
   centroid: [number, number];
+  zoom: number;
 };
